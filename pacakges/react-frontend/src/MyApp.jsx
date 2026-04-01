@@ -1,19 +1,11 @@
 // src/MyApp.jsx
 import React, { useState } from "react";
 import Table from "./Table";
+import Form from "./Form";
 
 
 function MyApp() {
-    const [characters, setCharacters] = useState([
-        {
-            name: "Charlie",
-            job: "Janitor"
-        },
-        {
-            name: "bob",
-            job: "goated"
-        } // the rest of the data
-    ]);
+    const [characters, setCharacters] = useState([]);
 
     function removeOneCharacter(index) {
         const updated = characters.filter((character, i) => {
@@ -28,6 +20,7 @@ function MyApp() {
                 characterData={characters}
                 removeCharacter={removeOneCharacter}
             />
+            <Form />
         </div>
     );
 }
