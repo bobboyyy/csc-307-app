@@ -12,9 +12,6 @@ const findUserByName = (name) => {
     );
 };
 
-const findUserById = (id) =>
-    users["users_list"].find((user) => user["id"] === id);
-
 app.get("/users", (req, res) => {
     const name = req.query.name;
     if (name != undefined) {
@@ -25,6 +22,10 @@ app.get("/users", (req, res) => {
         res.send(users);
     }
 });
+
+const findUserById = (id) =>
+    users["users_list"].find((user) => user["id"] === id);
+
 
 
 app.get("/users/:id", (req, res) => {
@@ -46,6 +47,27 @@ app.post("/users", (req, res) => {
     const userToAdd = req.body;
     addUser(userToAdd);
     res.send();
+});
+
+const removeUserById = (id) => {
+    const index = users["users_list"].findIndex(
+        (user) => user["id"] === id
+    );
+    if (index !== -1) {
+        users["users_list"].splice(index, 1);
+        return true;
+    }
+    return false;
+};
+
+
+app.delete("/users/:id", (req, res) => {
+    const id = req.params["id"];
+    if (removeUserById(id)) {
+        res.status(204).send();
+    } else {
+        res.status(404).send("Resource not found.");
+    }
 });
 
 
