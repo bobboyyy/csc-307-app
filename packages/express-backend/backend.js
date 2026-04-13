@@ -7,6 +7,7 @@ const port = 8000;
 
 app.use(cors());
 
+
 app.use(express.json());
 
 const findUserByName = (name) => {
@@ -47,15 +48,18 @@ app.get("/users/:id", (req, res) => {
     }
 });
 
+const generateId = () => Math.floor(Math.random() * 1000000).toString();
+
 const addUser = (user) => {
+    user.id = generateId();
     users["users_list"].push(user);
     return user;
 };
 
 app.post("/users", (req, res) => {
     const userToAdd = req.body;
-    addUser(userToAdd);
-    res.send();
+    const newUser = addUser(userToAdd);
+    res.status(201).send(newUser); // 201 + created object ID
 });
 
 const removeUserById = (id) => {
@@ -113,6 +117,16 @@ const users = {
             id: "zap555",
             name: "Dennis",
             job: "Bartender"
+        },
+        {
+            id: "b30101",
+            name: "bob",
+            job: "goated"
+        },
+        {
+            id: "062729",
+            name: "hay",
+            job: "yuhh"
         }
     ]
 };
