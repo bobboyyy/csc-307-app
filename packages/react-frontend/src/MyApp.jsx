@@ -10,7 +10,7 @@ function MyApp() {
 
 
     function removeOneCharacter(index) {
-        const id = characters[index].id;
+        const id = characters[index]._id;
         fetch(`http://localhost:8000/users/${id}`, { method: "DELETE" })
             .then((res) => {
                 if (res.status === 204) {
@@ -72,25 +72,25 @@ function MyApp() {
 
 
 
-    function postUser(person) {
-        const promise = fetch("Http://localhost:8000/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(person),
-        });
+    // function postUser(person) {
+    //     const promise = fetch("Http://localhost:8000/users", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(person),
+    //     });
 
-        return promise;
-    }
+    //     return promise;
+    // }
 
-    function updateList(person) {
-        postUser(person)
-            .then(() => setCharacters([...characters, person]))
-            .catch((error) => {
-                console.log(error);
-            })
-    }
+    // function updateList(person) {
+    //     postUser(person)
+    //         .then(() => setCharacters([...characters, person]))
+    //         .catch((error) => {
+    //             console.log(error);
+    //         })
+    // }
 
 }
 export default MyApp;
